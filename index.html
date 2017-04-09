@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Williams Sonoma - Toolchain</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(http://localhost:8000/assets/fonts/yanone.css);
+      @import url(http://localhost:8000/assets/fonts/droid.css);
+      @import url(http://localhost:8000/assets/fonts/ubuntu.css);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+
+      important { 
+        background-color: red;
+        font-size: 20pt;
+       }
+
+      .fit-image {
+        background-size: contain;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+  </head>
+  <body>
+    <script src="http://localhost:8000/assets/js/remark.js">
+    </script>
+    <script>
+      var slideshow = remark.create({
+        sourceUrl: 'markdown.md',
+        highlightLines: 'true',
+      });
+    </script>
+  </body>
+</html>
