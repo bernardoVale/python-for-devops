@@ -4,7 +4,7 @@ class: center, bottom
 # Python for DevOps
 
 ---
-# Introduction
+# Desclaimer
 
 1. This is not Algorithm 101 - We're not gonna cover all python data types
 
@@ -33,7 +33,16 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> myvar = 'foo'
 >>> type(myvar)
 <type 'str'>
+
+>>> myvar = 'this is nice'
+>>> myvar.split(' ')
+['this', 'is', 'nice']
 ```
+
+1. Data type conversion
+1. Strings format, `%` `+` `*`
+1. Special characters `\n`, `\t` (tripe quotes)
+
 
 ---
 # List
@@ -197,7 +206,26 @@ Create a function called `check_linux_version`:
 5. That returns `unkown_version` if the none of the above
 
 
---
+---
+
+# Exercise 02
+
+We will write a function similar to the GNU `grep` program.
+
+The function will:
+
+1. Receive two parameters `pattern` and `content`
+
+*pattern* is the string we're looking for
+
+*content* is a string with the file content
+
+
+The function should return a list with **all lines** that has the given `pattern`
+
+If the pattern wasn't found return an **empty list**
+
+---
 
 # Tuples
 
