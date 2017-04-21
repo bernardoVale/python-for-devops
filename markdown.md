@@ -227,6 +227,59 @@ If the pattern wasn't found return an **empty list**
 
 ---
 
+# Exception Handling
+
+_Errors should never pass silently._ ~ Zen of Python
+
+```python
+  try:
+    x = 5 + 'hey'
+  except:
+    print("you're stupid!")
+```
+--
+
+#### Pass
+
+_Unless explicitly silenced._ ~ Zen of Python
+```python
+  try:
+    x = 5 + 'hey'
+  except:
+    pass
+```
+--
+
+#### Raising Exceptions
+
+```python
+  try:
+    x = 5 + 'hey'
+  except:
+    raise MyCustomCoolException("You're stupid!")
+```
+
+---
+# Exception Handling
+
+Specific errors / Finally
+
+```python
+  try:
+    x = 5 + 'hey'
+  except ZeroDivisionError:
+    print("Shall not see")
+  finally:
+    print("Aloha")
+```
+
+---
+
+# I/O
+
+---
+
+
 # Tuples
 
 Tuple is an ordered sequence of items same as list.The only difference is that tuples are immutable. Tuples once created cannot be modified.
