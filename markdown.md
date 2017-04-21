@@ -13,7 +13,18 @@ class: top, right, fit-image
 layout: false
 background-image: url(http://localhost:8000/images/zen_of_python.png)
 
+
 ---
+# Language Features
+
+1. Dinamic language
+1. No semicolons, identation!
+1. We love whitespaces
+1. snake_case not camelCase. Please don't write camelCase!!!
+
+
+---
+
 
 class: left, middle
 background-position: bottom;
@@ -39,9 +50,20 @@ Type "help", "copyright", "credits" or "license" for more information.
 ['this', 'is', 'nice']
 ```
 
-1. Data type conversion
+???
+1. Multiline statement with `+ \`
+1. Multi assignment same line with semicolon
+1. Multiple variable assginment `a,b,c = foo, capa, foo`
+1. Multiple variable assignment same `x=y=z=foo` (This is not pointers!!!)
+1. Data type conversion `float(5)`
 1. Strings format, `%` `+` `*`
 1. Special characters `\n`, `\t` (tripe quotes)
+1. Comments with `#`
+
+---
+
+# Operators
+
 
 
 ---
@@ -275,11 +297,6 @@ Specific errors / Finally
 
 ---
 
-# I/O
-
----
-
-
 # Tuples
 
 Tuple is an ordered sequence of items same as list.The only difference is that tuples are immutable. Tuples once created cannot be modified.
@@ -309,3 +326,60 @@ sys.path
 for path in sys.path:
   print(path)
 ```
+
+---
+
+# I/O
+
+Handling Files
+
+```python
+f = open("test.txt", 'r')
+f.read()
+f.close()
+```
+
+???
+1. read, than readlines
+1. line loop
+1. try,finally
+1. Show the `seek` example to read the content again
+Show the old way py26 than the new way
+
+--
+
+Writing
+```python
+with open("test.txt", mode='w') as writer:
+  writer.write("my content\n")
+  writer.write("this is nice\n")
+```
+
+???
+1. Writing file
+
+---
+
+# Exercise xx
+
+Write a grep script, for real this time! Use your grep engine (Exercise 02) to save some time.
+
+The file name should be exact: **grep.py**
+
+The script should receive two arguments. First, the **search pattern**, Second the **file path**.
+
+The script should exit with **returncode 1** and return a message if: 
+
+  1. Both arguments were not provided. Print message: **Two arguments are required, pattern and file path.**
+  1. The file doesn't exists. Print message: **File *filename* doesn't exists**
+
+The script should return:
+  1. The same way as GNU grep, return **each match in a new line**.
+  1. Nothing if no lines matches
+
+Remember the pythonic way is **ask for forgiveness not permission!**
+
+
+BONUS: Replace GNU grep with your new script using a shell alias: ```alias grep="/path/to/grep.py"```
+
+---
