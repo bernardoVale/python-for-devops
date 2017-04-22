@@ -381,8 +381,7 @@ The script should return:
 
 Remember the pythonic way is **ask for forgiveness not permission!**
 
-
-BONUS: Replace GNU grep with your new script using a shell alias: ```alias grep="/path/to/grep.py"```
+BONUS: Replace GNU grep with your new script using a shell alias: `alias grep="/path/to/grep.py"`
 
 ---
 
@@ -390,11 +389,82 @@ BONUS: Replace GNU grep with your new script using a shell alias: ```alias grep=
 
 Regular expressions are handled by module `import re`
 
-Spliting 
+Most methods follows the same structure:
 
-``python
-print(re.split(r'\s*', 'Here are some words'))
+1. Pattern
+2. String
+3. Flags
+
+--
+
+### FINDALL
+
+Return a list with all matches
+
+```python
+import re
+re.findall(r'\d+', "Bernardo has 25 years old and he's a "
+"DevOps Engineer at AvenueCode")
 ```
 
+???
 
-regex101.com is your friend
+Findall
+`\d` = any digit
++ = One or more occurance
+
+---
+
+# Regular Expression
+
+Compiling a regular expression
+
+```python
+regex = re.compile('http\://|https://')
+regex.match("https://avenuecode.com")
+```
+
+???
+Demonstrate re.match() = Return match object or None
+
+--
+Searching for a pattern
+
+```python
+print(re.match(r'avenuecode', "https://avenuecode.com"))
+print(re.search(r'avenuecode', "https://avenuecode.com"))
+
+```
+???
+.group() to return the matched string
+
+--
+
+Find all occurences
+
+```python
+test = """
+https://avenuecode.com
+https://avenuecode.com.br
+https://acdc.avenuecode.com
+https://jenkins.avenuecode.com"""
+print(re.search(r'avenuecode', "https://avenuecode.com"))
+print(re.findAll(r'avenuecode', "https://avenuecode.com"))
+```
+
+---
+# Regular Expression
+
+Replacing stuff!
+
+```python
+re.sub(r'avenuecode', 'ac4success', "https://avenuecode.com")
+```
+
+-- 
+Grouping
+
+```python
+regex = re.match(r'(http|https)\://(\w*).(\w.*)', "https://jenkins.avenuecode.com", flags=re.MULTILINE)
+regex.group(1))
+```
