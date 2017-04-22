@@ -340,9 +340,10 @@ f.close()
 ```
 
 ???
-1. read, than readlines
-1. line loop
+1. read, than readlines than readline
+1. line loop, print with `end=''`
 1. try,finally
+1. `with` context manager
 1. Show the `seek` example to read the content again
 Show the old way py26 than the new way
 
@@ -357,6 +358,7 @@ with open("test.txt", mode='w') as writer:
 
 ???
 1. Writing file
+1. Append a file
 
 ---
 
