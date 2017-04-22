@@ -383,3 +383,16 @@ Remember the pythonic way is **ask for forgiveness not permission!**
 BONUS: Replace GNU grep with your new script using a shell alias: ```alias grep="/path/to/grep.py"```
 
 ---
+
+# Regular Expression
+
+Regular expressions are handled by module `import re`
+
+Spliting 
+
+``python
+print(re.split(r'\s*', 'Here are some words'))
+```
+
+
+regex101.com is your friend
