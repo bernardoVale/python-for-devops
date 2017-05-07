@@ -1,10 +1,7 @@
-DevOps Toolchain
+Python for DevOps Toolchain
 =======================
 
-I'm teaching myself about WSGC DevOps Toolchain.
-
-This presentation will be used to explain the current state of our DevOps toolchain
-and to share ideas about how we can improve it.
+Python language introduction for DevOps Engineers
 
 To run this presentation execute:
 

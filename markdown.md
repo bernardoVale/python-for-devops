@@ -468,3 +468,102 @@ Grouping
 regex = re.match(r'(http|https)\://(\w*).(\w.*)', "https://jenkins.avenuecode.com", flags=re.MULTILINE)
 regex.group(1))
 ```
+
+---
+
+# Interacting with Underlying OS
+
+```python
+import os
+```
+
+Interacting with the File System
+
+
+Getting file information
+???
+os.getcwd()
+os.listdir()
+os.stat(file) // 
+os.makedirs('foo/bar')
+os.listdir() // or give path
+
+# Modification time example
+mod_time = os.stat('.gitignore').st_mtime
+print(datetime.datetime.fromtimestamp(mod_time))
+
+---
+
+# OS
+
+Environment Variables
+```python
+os.environ
+
+os.getenv('PATH')
+```
+--
+
+Creating a file at home. How can we do that?
+
+
+???
+Example: LOGNAME to collect username
+
+print(os.path.join(os.getenv('HOME'), 'foo.txt'))
+print(os.path.expanduser("~/foo.txt"))
+
+Get file
+os.path.exists()
+
+Remove it
+os.remove()
+
+File path manipulation
+os.path.basename -- filename
+os.path.dirname -- directory
+os.path.split -- split file/path
+os.path.splitext(f) -- split file and extension
+
+os.uname()
+
+---
+
+# SHUTIL
+
+```python
+import shutil
+```
+
+???
+1. Create a file
+1. shutil.copy to /tmp
+1. shutil.move to user home
+1. Create a bunch of temp files
+1. Use shutil.copytree
+1. Remove it using shutil.rmtree
+1. Create a backup using shutil.make_archive
+
+```python
+shutil.make_archive('backup', format='zip', root_dir='/Users/bvale/projects/python-devops/exercise01')
+```
+
+---
+
+# Exercises
+
+1. Write a script that compress files older than 7 days from a given folder
+
+```shell
+./script /tmp/backup
+```
+
+2. Write a second script that removes all files from a folder that has an specific extension:
+
+```shell
+./script2 /tmp/files bkp
+```
+
+---
+
+# Subprocess :)
