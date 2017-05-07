@@ -527,6 +527,7 @@ os.path.splitext(f) -- split file and extension
 
 os.uname()
 
+os.system -- calls os, but let's work on subprocess
 ---
 
 # SHUTIL
@@ -567,3 +568,90 @@ shutil.make_archive('backup', format='zip', root_dir='/Users/bvale/projects/pyth
 ---
 
 # Subprocess :)
+
+The subprocess module allows you to spawn new processes, connect to their input/output/error pipes, and obtain their return codes. This module intends to replace several older modules and functions:
+
+```
+os.system
+os.spawn*
+os.popen*
+popen2.*
+commands.*
+```
+
+PEP 324 – PEP proposing the subprocess module
+
+--
+
+Let's give it a try :)
+
+```python
+subprocess.call(cmd)
+```
+
+???
+`subprocess.call(cmd)` wait for cmd exec and return resultcode
+
+1. Explain result code
+1. Explain list of commands
+1. Explain shell=True with exit and ls and the threats with `;` plus rm -rf --no-preserve-root
+1. Explain stdout with a file
+
+---
+# Subprocess :)
+
+What if we don't wanna write a logic to identify errors ?
+
+--
+
+
+```
+subprocess.check_output(cmd)
+```
+
+???
+1. Show the exceptions and the output
+
+---
+#Subprocess
+
+Complex cases. Popen!
+
+https://docs.python.org/2/library/subprocess.html#popen-constructor
+
+???
+Explain why popen is usefull, e.g: cwd, env, rc, stdout, stderr
+
+Open process and explain the lifecycle `child = subprocess.Popen(["sleep", "20"])`
+1. child.poll()
+1. child.kill()
+
+1. Open a shell with child = subprocess.Popen("/bin/bash", stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+and use communicate to send data
+
+---
+# Exercice Time
+
+Write a script to deploy a static website.
+
+1. Install nginx or apache
+1. Push your html to nginx home/apache home
+1. Reload the web server if you need
+
+To test it use Vagrant or Docker
+
+For docker, run a centos:7 with this command:
+
+```
+docker run -it --rm -v $(pwd)/deploy.py:/tmp/deploy.py -p 81:80 centos:7
+
+python /tmp/deploy.py
+```
+
+---
+
+# Sys
+
+```python
+import sys
+```
