@@ -622,7 +622,7 @@ https://docs.python.org/2/library/subprocess.html#popen-constructor
 ???
 Explain why popen is usefull, e.g: cwd, env, rc, stdout, stderr
 
-Open process and explain the lifecycle `child = subprocess.Popen(["sleep", "20"])`
+Open process and explain the lifecycle `child = subprocess.Popen(["jconsole"])`
 1. child.poll()
 1. child.kill()
 
