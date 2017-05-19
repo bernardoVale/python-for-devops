@@ -56,7 +56,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 1. Multiple variable assginment `a,b,c = foo, capa, foo`
 1. Multiple variable assignment same `x=y=z=foo` (This is not pointers!!!)
 1. Data type conversion `float(5)`
-1. Strings format, `%` `+` `*`
+1. Strings format, `%` `+` `*` https://docs.python.org/2/library/stdtypes.html#string-formatting-operations
 1. Special characters `\n`, `\t` (tripe quotes)
 1. Comments with `#`
 
@@ -312,7 +312,38 @@ Dictionary is an unordered collection of key-value pairs.
 
 It is generally used when we have a huge amount of data. Dictionaries are optimized for retrieving data. We must know the key to retrieve the value.
 
+an be marshall/unmarshall to JSON
+
+```python
+>>> foo = {}
+```
+
+???
+1. Create a dict from cmd. Show how to access the value
+1. Insert/Update key
+1. Looping over a dict
+1. Find if key exists with `in` and `has_key`
+1. Method `keys`/`iterkets`, `values`
+1. Show `iteritems` method
+1. `del dict[key]`
+1. `dict.get(key, default)`
+
 ---
+# Exercices
+
+1. Given a string return a dict where letters from the string are keys and the value are the count of it in the string.
+
+Example: banana
+```
+{'b': 1, 'a': 3, 'n': 2}
+```
+
+#Set
+
+A set object is an unordered collection of distinct hashable objects. Common uses include membership testing, removing duplicates from a sequence, and computing mathematical operations such as intersection, union, difference, and symmetric difference. (For other containers see the built in dict, list, and tuple classes, and the collections module.)
+
+---
+
 # Python Modules
 
 When our program grows bigger, it is a good idea to break it into different modules.
