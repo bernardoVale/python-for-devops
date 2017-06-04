@@ -21,6 +21,7 @@ background-image: url(http://localhost:8000/images/zen_of_python.png)
 1. No semicolons, identation!
 1. We love whitespaces
 1. snake_case not camelCase. Please don't write camelCase!!!
+1. Functions are first class citizen
 
 
 ---
@@ -346,9 +347,52 @@ A set object is an unordered collection of distinct hashable objects. Common use
 
 # Python Modules
 
-When our program grows bigger, it is a good idea to break it into different modules.
+A module is a file containing Python definitions and statements. The file name is the module name with the suffix .py appended. Within a module, the module’s name (as a string) is available as the value of the global variable __name__. For instance, use your favorite text editor to create a file called fibo.py in the current directory with the following contents:
 
-A module is a file containing Python definitions and statements. Python modules have a filename and end with the extension .py.
+```python
+_MAGIC_VAR="HELLO"
+
+def fib(n):    # write Fibonacci series up to n
+    a, b = 0, 1
+    while b < n:
+        print b,
+        a, b = b, a+b
+
+def fib2(n):   # return Fibonacci series up to n
+    result = []
+    a, b = 0, 1
+    while b < n:
+        result.append(b)
+        a, b = b, a+b
+    return result
+
+```
+
+???
+1. Show how to import the code `import fib`
+1. Show method `dir()` that shows what was imported
+1. Show how to import only fib.
+1. Add some code to fibo.py to show that it will be executed
+1. import * to show that global `_MAGIC_VAR` won't get imported
+
+---
+# Modules
+
+How do we execute `fibo` and also make the functions available to other scripts
+without executing when `fibo` is imported?
+
+--
+
+```python
+if __name__ == "__main__":
+    import sys
+    fib(int(sys.argv[1]))
+```
+
+???
+1. First special variable `__name__`
+1. Explain that imports can come in any part of the code we want. That's not antipattern
+
 
 ```python
 import sys
@@ -357,6 +401,62 @@ sys.path
 for path in sys.path:
   print(path)
 ```
+
+---
+
+# Module Search Path
+
+When a module named `fibo` is imported, the interpreter first searches for a built-in module with that name. 
+
+If not found, it then searches for a file named fibo.py in a list of directories given by the variable `sys.path`. sys.path is initialized from these locations:
+
+1. The directory containing the input script (or the current directory).
+1. `PYTHONPATH` (a list of directory names, with the same syntax as the shell variable PATH).
+1. The installation-dependent default
+
+
+---
+# Python Packages
+
+Packages are a way of structuring Python’s module namespace by using `dotted module names`. 
+
+--
+
+For example, the module name sys.path designates a submodule named `path` in a package named `sys`. 
+
+---
+
+# Python Packages
+
+A package is a directoy containing an `__init__py` file.
+
+The `__init__.py` files are required to make Python treat the directories as containing packages.
+
+```
+sound/                          Top-level package
+      __init__.py               Initialize the sound package
+      formats/                  Subpackage for file format conversions
+              __init__.py
+              wavread.py
+              wavwrite.py
+              aiffread.py
+              aiffwrite.py
+              auread.py
+              auwrite.py
+              ...
+      effects/                  Subpackage for sound effects
+              __init__.py
+              echo.py
+              surround.py
+              reverse.py
+              ...
+      filters/                  Subpackage for filters
+              __init__.py
+              equalizer.py
+              vocoder.py
+              karaoke.py
+```
+
 
 ---
 
@@ -680,6 +780,11 @@ python /tmp/deploy.py
 ```
 
 ---
+
+# Classes
+
+---
+
 
 # Sys
 
