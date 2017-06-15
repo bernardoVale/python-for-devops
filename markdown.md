@@ -8,6 +8,10 @@ class: center, bottom
 
 1. This is not Algorithm 101 - We're not gonna cover all python data types
 
+--
+
+1. We won't talk about objects because it's not a priority for this training.
+
 ---
 class: top, right, fit-image
 layout: false
@@ -60,12 +64,6 @@ Type "help", "copyright", "credits" or "license" for more information.
 1. Strings format, `%` `+` `*` https://docs.python.org/2/library/stdtypes.html#string-formatting-operations
 1. Special characters `\n`, `\t` (tripe quotes)
 1. Comments with `#`
-
----
-
-# Operators
-
-
 
 ---
 # List
@@ -180,6 +178,7 @@ foo
 True
 ```
 ---
+
 # Functions
 
 You can have optional arguments:
@@ -338,10 +337,6 @@ Example: banana
 ```
 {'b': 1, 'a': 3, 'n': 2}
 ```
-
-#Set
-
-A set object is an unordered collection of distinct hashable objects. Common uses include membership testing, removing duplicates from a sequence, and computing mathematical operations such as intersection, union, difference, and symmetric difference. (For other containers see the built in dict, list, and tuple classes, and the collections module.)
 
 ---
 
@@ -761,6 +756,8 @@ Open process and explain the lifecycle `child = subprocess.Popen(["jconsole"])`
 and use communicate to send data
 
 ---
+
+
 # Exercice Time
 
 Write a script to deploy a static website.
@@ -781,13 +778,122 @@ python /tmp/deploy.py
 
 ---
 
-# Classes
+# Argparse
+
+The argparse module makes it easy to write user-friendly command-line interfaces. The program defines what arguments it requires, and argparse will figure out how to parse those out of `sys.argv`. The argparse module also automatically generates help and usage messages and issues errors when users give the program invalid arguments.
+
+
+```python
+#!/usr/bin/python
+import argparse
+
+parser = argparse.ArgumentParser(description='My program is really cool.')
+
+args = parser.parse_args()
+```
+
+
+???
+In a script, parse_args() will typically be called with no arguments, and the ArgumentParser will automatically determine the command-line arguments from sys.argv.
+
+1. Positional arguments `parser.add_argument('double', type=int, help="Double the given number")`
+1. Optional arguments: `parser.add_argument("--verbosity", help="increase output verbosity", action="store_true")`
+1. Short options: `parser.add_argument("-v", "--verbosity", help="increase output verbosity", action="store_true")`
+1. Optional with values: `parser.add_argument('--divide', type=int)`
+```python
+total = args.double*2
+if args.divide:
+    total = total / args.divide
+print total
+```
 
 ---
 
+# Exercice Argparse
 
-# Sys
+Write a script using `argparse` to print files of a given folder.
+
+Each file should be printed in a separate line with the format:
+
+```
+user group file
+```
+
+1. The first positional argument should be a path
+1. Provide an optional argument `--size` that accepts a list of values [bytes, KB, MB, GB] if this argument is used the program
+will print the file and the size formatted with given option.
+1. Provide an optional argument `--machine` that will print the each information separated by a comma
+
+Example:
+```
+./prog.py dist/ --machine --size MB
+
+bvale,staff,4MB,folder1/
+bvale,staff,0.1MB,foo.txt
+bvale,staff,210MB,folder2/
+```
+---
+
+# Virtual Environment
+
+A Virtual Environment is a tool to keep the dependencies required by different projects in separate places, by creating virtual Python environments for them. It solves the "Project X depends on version 1.x but, Project Y needs 4.x" dilemma, and keeps your global site-packages directory clean and manageable.
+
+```shell
+pip install virtualenv
+```
+
+Creating a virtualenv:
+```
+python -m virtualenv name/
+```
+
+---
+
+# Code Dependencies
+
+`pip` is the offical python tool to handle dependencies.
+
+We usually define a `requirements.txt` which is a file containing a list of items to be installed using `pip install` like so:
+
+```
+pip install -r requirements.txt
+```
+
+---
+
+# Requests - HTTP for Humans
+
+Requests allows you to send organic, grass-fed HTTP/1.1 requests, without the need for manual labor. There's no need to manually add query strings to your URLs, or to form-encode your POST data. Keep-alive and HTTP connection pooling are 100% automatic, thanks to urllib3.
+
+```python
+import requests
+r = requests.get("https://api.chucknorris.io/jokes/random")
+```
+
+???
+1. r.status_code
+1. r.json()['value']
+
+---
+
+# Packaging 
+
+---
+
+# Deprecated slides
+
+## sys
+This module provides access to some variables used or maintained by the interpreter and to functions that interact strongly with the interpreter. It is always available
 
 ```python
 import sys
 ```
+
+???
+sys.argv
+
+---
+
+# Classes
+
+Not going to talk about classes 
