@@ -13,24 +13,100 @@ class: center, bottom
 1. We won't talk about objects because it's not a priority for this training.
 
 ---
-class: top, right, fit-image
-layout: false
-background-image: url(http://localhost:8000/images/zen_of_python.png)
 
+# Objective
+
+Learn how to write Python scripts to solve simple DevOps problems without a Configuration Management tool.
+
+Things you often use like:
+
+- Executing shell commands
+- Working with files
+- Interacte with the underling OS
+- Executing HTTP requests
+--
+
+### Why?
+--
+
+1. Python is easy and straight forward.
+1. Python based Cfg. Management tools uses the things we'll learn here.
+1. You might not have a Cfg. Management tool available in your environment
+
+---
+
+# How
+
+Extreamly hands-on. We learn a language by writing code
+
+--
+
+We'll use python27 instead of py3 because in the DevOps world py2 still rules.
 
 ---
 # Language Features
 
 1. Dinamic language
+
+???
+Interprated code
+
+--
+
 1. No semicolons, identation!
+
+--
+
 1. We love whitespaces
+
+???
+We often separate chunks of code with whitespaces to improve readability.
+
+--
+
 1. snake_case not camelCase. Please don't write camelCase!!!
+
+???
+Class naming is an special case.
+
+--
 1. Functions are first class citizen
+
 
 
 ---
 
+# Use cases
 
+1. DevOps and System / Network Administration
+
+???
+Saltstack, ansible, fabric, openstack
+--
+
+1. Machine Learning
+
+--
+
+1. Scientific and Numeric computing
+???
+Replacement for matlab
+numpy, scipy
+
+--
+1. Web Development
+
+???
+Instagram backend is python
+
+
+---
+
+class: top, right, fit-image
+layout: false
+background-image: url(http://localhost:8000/images/zen_of_python.png)
+
+---
 class: left, middle
 background-position: bottom;
 
@@ -39,10 +115,6 @@ background-position: bottom;
 Python is a dynamic language, we don't have to declare types!
 
 ```shell
-$ python
-Python 2.7.13 (default, Dec 18 2016, 07:03:39)
-[GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.42.1)] on darwin
-Type "help", "copyright", "credits" or "license" for more information.
 >>> myvar = 5
 >>> type(myvar)
 <type 'int'>
@@ -56,6 +128,8 @@ Type "help", "copyright", "credits" or "license" for more information.
 ```
 
 ???
+1. Show the type command on str and int
+1. Show simple aritimetic 
 1. Multiline statement with `+ \`
 1. Multi assignment same line with semicolon
 1. Multiple variable assginment `a,b,c = foo, capa, foo`
@@ -299,11 +373,13 @@ Specific errors / Finally
 
 # Tuples
 
-Tuple is an ordered sequence of items same as list.The only difference is that tuples are immutable. Tuples once created cannot be modified.
+Tuple is an ordered sequence of items same as list. The only difference is that tuples are immutable. Tuples once created cannot be modified.
 
 Tuples are used to write-protect data and are usually faster than list as it cannot change dynamically.
 
-
+???
+1. Show a tuple
+1. Show a function that returns a tuple
 
 ---
 #Dictionaries
@@ -877,6 +953,36 @@ r = requests.get("https://api.chucknorris.io/jokes/random")
 ---
 
 # Packaging 
+
+Distributing python applications the right way.   
+
+Let's write a chucknorris CLI tool
+
+`setup.py`:
+```python
+from distutils.core import setup
+
+setup(
+    name='ChuckNorris',
+    version='0.1.0',
+    author='Bernardo Vale',
+    author_email='bvale@avenuecode.com',
+    packages=['chucknorris'],
+    scripts=['bin/chucknorris'],
+    description='ChuckNorris cli quotes generator.',
+    long_description=open('README.txt').read(),
+    install_requires=[
+        "requests >= 1.1.1",
+    ],
+)
+```
+
+
+???
+A Python installation has a site-packages directory inside the module directory. This directory is where user installed packages are dropped.
+
+1. Create the setup.py in the root folder
+1. bin folder and chucknorris module folder
 
 ---
 
