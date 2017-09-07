@@ -6,11 +6,9 @@ class: center, bottom
 ---
 # Desclaimer
 
-1. This is not Algorithm 101 - We're not gonna cover all python data types
-
---
-
+???
 1. We won't talk about objects because it's not a priority for this training.
+1. This is not Algorithm 101 - We're not gonna cover all python data types
 
 ---
 
@@ -94,6 +92,7 @@ Replacement for matlab
 numpy, scipy
 
 --
+
 1. Web Development
 
 ???
@@ -109,17 +108,6 @@ background-image: url(http://localhost:8000/images/zen_of_python.png)
 ---
 class: left, middle
 background-position: bottom;
-
-#Generators
-Introduce generators
-
-# PEP8
-
-PEP8
-flake8 = pep8 + pyflakes
-pyflakes = 
-tox
-
 
 # Variables
 
@@ -601,6 +589,127 @@ BONUS: Replace GNU grep with your new script using a shell alias: `alias grep="/
 
 ---
 
+#Generators
+
+Generators are lazy iterators!
+
+To understand generators we must first understand **Iterators!**.
+
+---
+
+# Iterators
+
+Iterators are objects that implements the `iterator` protocol.
+
+--
+
+Python lists, tuples, dicts and sets are all examples of inbuilt iterators. 
+
+--
+
+Python magic method `__iter__` and `next`!
+
+Method `next` is called whenever global function `next()` is called.
+
+`StopIteration` when exception when there is no longer any 
+new value to return to signal the end of the iteration.
+
+???
+method that is called on initialization of an iterator. This should return an object that has a next method (In python 3 this is changed to __next__).
+
+---
+
+# Iterators
+
+
+
+```python
+class Fib:                                        
+    def __init__(self, max):                      
+        self.max = max
+
+    def __iter__(self):                          
+        self.a = 0
+        self.b = 1
+        return self
+
+    def next(self):                          
+        fib = self.a
+        if fib > self.max:
+            raise StopIteration                  
+        self.a, self.b = self.b, self.a + self.b
+        return fib     
+```
+
+???
+When an iterator is used with a for loop, the for loop implicitly calls `next()`
+
+---
+
+# Generators
+
+Is a function which returns a `generator iterator` (just an object we can iterate over) by calling `yield`.
+
+--
+
+`yield` return the control of the **producer** to the caller.
+
+--
+
+The next time a caller call `next()` the **producer** gets the control back.
+
+--
+
+**return x yield**
+
+`return` implies that the function is returning control of execution to the point where the function was called. 
+
+`yield` however, implies that the transfer of control is temporary and voluntary, and our function expects to regain it in the future.
+
+---
+
+# Generators
+
+With generators:
+
+```python
+def fib(max):
+    a, b = 0, 1
+    while a < max:
+        yield a
+        a, b = b, a + b
+```
+
+--
+
+Without Generators:
+
+```python
+def fib(max):
+    numbers = []
+    a, b = 0, 1
+    while a < max:
+        numbers.append(a)
+        a, b = b, a + b
+     return numbers
+```
+
+???
+Paste function in shell and show the object and `next` function
+Show in a loop.
+
+---
+
+# Exercise - Fix grep function
+
+What is wrong with our grep function?
+
+--
+
+Fix your grep script using generators.
+
+---
+
 # Regular Expression
 
 Regular expressions are handled by module `import re`
@@ -1030,9 +1139,47 @@ A Python installation has a site-packages directory inside the module directory.
 
 Using your new awesome Python skills write a CI tool to replace Jenkins (lol)
 
+
+Your challenge is to write a script that will execute a simple pipeline (already designed) inside our Git repository:
+
+https://github.com/bernardoVale/devops-scripting.git
+
+Inside the repository, we've added a `pipeline.yml` file. Your CI tool will lookup this file to execute the requested pipeline that will be implemented in your tool.
+
+In a glance, your script needs to:
+
+1. Fetch git code (https://github.com/bernardoVale/devops-scripting.git)
+1. Parse the `pipeline.yml`
+1. Run selected pipeline
+
+---
+
+#### Pipeline.yml Format
+
+The pipeline file has only three main hashes.
+
+Branch: Repository branch that should be used to execute the code.
+
+Tasks: Saved commands that can be used to create a pipeline
+
+Pipelines: Group of ordered tasks
+
+#### Script Arguments
+
+1. Pipeline name, E.g: build
+1. Git repository URL
+
+
+#### Examples
+
+Assuming your script name is `pipeline` - You're free to give a name to your CI tool :)
+
+Should fetch git code and execute `build` pipeline:
+```shell
+./pipeline build https://bitbucket.org/ac-recruitment/scripting-helloworld.git
 ```
-./my-awesome-ci-tool build 
-```
+
+---
 
 # Deprecated slides
 
@@ -1051,3 +1198,12 @@ sys.argv
 # Classes
 
 Not going to talk about classes 
+
+---
+
+# PEP8
+
+PEP8
+flake8 = pep8 + pyflakes
+pyflakes = 
+tox
