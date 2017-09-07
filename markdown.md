@@ -110,6 +110,17 @@ background-image: url(http://localhost:8000/images/zen_of_python.png)
 class: left, middle
 background-position: bottom;
 
+#Generators
+Introduce generators
+
+# PEP8
+
+PEP8
+flake8 = pep8 + pyflakes
+pyflakes = 
+tox
+
+
 # Variables
 
 Python is a dynamic language, we don't have to declare types!
@@ -168,6 +179,8 @@ my_list[-4:]
 'foo' in my_list
 ```
 
+???
+List comprehension
 ---
 
 # Control Flow
