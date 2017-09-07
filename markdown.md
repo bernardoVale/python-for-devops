@@ -420,12 +420,13 @@ an be marshall/unmarshall to JSON
 ---
 # Exercices
 
-1. Given a string return a dict where letters from the string are keys and the value are the count of it in the string.
+Given a string return a dict where letters from the string are keys and the value are the count of it in the string.
 
 Example: banana
 ```
 {'b': 1, 'a': 3, 'n': 2}
 ```
+  
 
 ---
 
@@ -742,7 +743,31 @@ os.path.splitext(f) -- split file and extension
 
 os.uname()
 
-os.system -- calls os, but let's work on subprocess
+`os.walk` to use in our exercise
+
+---
+
+# Exercise
+
+Write a function that maps the quantity of data types found starting from the current working directory:
+
+```
+foo/
+  bar/
+    file1.sh
+  biz.txt
+folder/
+  one.txt
+```
+
+```
+{
+  "txt": 2,
+  "sh": 1,
+  "directory": 3 
+}
+```
+
 ---
 
 # SHUTIL
@@ -849,18 +874,20 @@ and use communicate to send data
 
 # Exercice Time
 
-Write a script to deploy a static website.
+Write a script to deploy a Java web app :)
 
-1. Install nginx or apache
-1. Push your html to nginx home/apache home
-1. Reload the web server if you need
+1. Install tomcat and jdk8 -- if needed
+1. Start tomcat -- if needed
+1. Deploy your WAR file (I will provide a WAR file if you don't have one)
+1. Reload tomcat
+1. Treat your deployer to be idempotent
 
 To test it use Vagrant or Docker
 
 For docker, run a centos:7 with this command:
 
 ```
-docker run -it --rm -v $(pwd)/deploy.py:/tmp/deploy.py -p 81:80 centos:7
+docker run -it --rm -v $(pwd)/deploy.py:/tmp/deploy.py -p 8080:8080 centos:7
 
 python /tmp/deploy.py
 ```
@@ -998,6 +1025,14 @@ A Python installation has a site-packages directory inside the module directory.
 1. bin folder and chucknorris module folder
 
 ---
+
+# Final Project - Exercise
+
+Using your new awesome Python skills write a CI tool to replace Jenkins (lol)
+
+```
+./my-awesome-ci-tool build 
+```
 
 # Deprecated slides
 
