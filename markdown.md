@@ -128,7 +128,7 @@ Python is a dynamic language, we don't have to declare types!
 
 ???
 1. Show the type command on str and int
-1. Show simple aritimetic 
+1. Show simple aritimetic + * ** multiply string
 1. Multiline statement with `+ \`
 1. Multi assignment same line with semicolon
 1. Multiple variable assginment `a,b,c = foo, capa, foo`
@@ -167,8 +167,6 @@ my_list[-4:]
 'foo' in my_list
 ```
 
-???
-List comprehension
 ---
 
 # Control Flow
@@ -290,6 +288,9 @@ Returning and documentation:
 >>> stupid_sum(1, 1)
 2
 ```
+
+???
+kwargs, *args
 
 ---
 # Exercise 01
