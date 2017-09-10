@@ -16,21 +16,36 @@ class: center, bottom
 
 Learn how to write Python scripts to solve simple DevOps problems without a Configuration Management tool.
 
-Things you often use like:
 
-- Executing shell commands
-- Working with files
-- Interacte with the underling OS
-- Executing HTTP requests
+Approach:
+
+- Learn the basics of python language
+
+--
+
+- Best practices
+
+--
+
+- Most used modules for scripting/DevOps
+
+--
+
+- Packaging / Writing CLI tools
+
+
 --
 
 ### Why?
 --
 
 1. Python is easy and straight forward.
-1. Python based Cfg. Management tools uses the things we'll learn here.
-1. You might not have a Cfg. Management tool available in your environment
+--
 
+1. Python based Cfg. Management tools uses the things we'll learn here.
+--
+
+1. You might not have a Cfg. Management tool available in your environment
 ---
 
 # How
@@ -41,10 +56,13 @@ Extreamly hands-on. We learn a language by writing code
 
 We'll use python27 instead of py3 because in the DevOps world py2 still rules.
 
+???
+Explain py3 and py2
+
 ---
 # Language Features
 
-1. Dinamic language
+1. Dynamic language
 
 ???
 Interprated code
@@ -71,18 +89,17 @@ Class naming is an special case.
 1. Functions are first class citizen
 
 
-
 ---
 
 # Use cases
 
-1. DevOps and System / Network Administration
+1. DevOps and System / Network Administration / SecOps
 
 ???
 Saltstack, ansible, fabric, openstack
 --
 
-1. Machine Learning
+1. Data Science
 
 --
 
@@ -129,15 +146,15 @@ Python is a dynamic language, we don't have to declare types!
 ???
 1. Show the type command on str and int
 1. Show simple aritimetic + * ** multiply string
+1. Data type conversion `float(5)`
 1. Multiline statement with `+ \`
 1. Multi assignment same line with semicolon
 1. Multiple variable assginment `a,b,c = foo, capa, foo`
 1. Multiple variable assignment same `x=y=z=foo` (This is not pointers!!!)
-1. Data type conversion `float(5)`
-1. Strings format, `%` `+` `*` https://docs.python.org/2/library/stdtypes.html#string-formatting-operations
+1. Strings format, `%` `+` `*` https://pyformat.info/
 1. Special characters `\n`, `\t` (tripe quotes)
 1. Comments with `#`
-
+  
 ---
 # List
 
@@ -168,6 +185,12 @@ my_list[-4:]
 ```
 
 ---
+???
+1. my_list = ['foo', 5, 5.0, True]
+1. lookup my_list[0]
+1. append - my_list.append('New Element')
+1. my_list.pop(1)
+1. my_list.remove(5)
 
 # Control Flow
 
@@ -208,8 +231,14 @@ if something is not None:
   statement
 ```
 
+Ternary:
+
+```python
+condition_is_true if condition else condition_is_false
+```
+
 ---
-# Freaking For Loop ma friend
+# Looping :)
 
 Most common way to loop:
 
@@ -231,7 +260,54 @@ for item in range(len(mah_list)):
   print(item)
 ```
 
+```python
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+
 ---
+
+# Break on Loop
+
+Your searching for items in a container, when item is found you want process it and exit the loop.
+
+If you dont find any items in the container you want to call a special function.
+
+--
+
+```python
+found_items = False
+for item in container:
+    if search_something(item):
+        # Found it!
+        process(item)
+        found_items = True
+        break
+
+if not found_items:
+    # Didn't find anything..
+    do_something()
+```
+
+---
+
+# Bizare Python `for else`:
+
+```python
+for item in container:
+    if search_something(item):
+        # Found it!
+        process(item)
+        break
+else:
+    # Didn't find anything..
+    not_found_in_container()
+```
+
+---
+
 
 # Functions
 
@@ -255,6 +331,7 @@ True
 # Functions
 
 You can have optional arguments:
+
 ```python
 def foo(name, caps=True):
   greeting = "Hello {}".format(name)
@@ -292,6 +369,7 @@ Returning and documentation:
 ???
 kwargs, *args
 
+
 ---
 # Exercise 01
 
@@ -303,6 +381,8 @@ Create a function called `check_linux_version`:
 4. That returns `el7` if the kernel belongs to a Enterprise Linux 7
 5. That returns `unkown_version` if the none of the above
 
+???
+Running `python -m unittest discover`
 
 ---
 
@@ -318,10 +398,9 @@ The function will:
 
 *content* is a string with the file content
 
-
 The function should return a list with **all lines** that has the given `pattern`
 
-If the pattern wasn't found return an **empty list**
+If not found return an **empty list**
 
 ---
 
@@ -346,6 +425,7 @@ _Unless explicitly silenced._ ~ Zen of Python
   except:
     pass
 ```
+
 --
 
 #### Raising Exceptions
@@ -354,8 +434,29 @@ _Unless explicitly silenced._ ~ Zen of Python
   try:
     x = 5 + 'hey'
   except:
-    raise MyCustomCoolException("You're stupid!")
+    raise CustomCoolError("You're stupid!")
 ```
+
+???
+`class CustomError(BaseException): pass`
+
+`except (TypeError, ZeroDivisionError)`
+
+```python
+    try:
+        child = subprocess.Popen(['java', '-version'], stderr=subprocess.PIPE)
+        _, output = child.communicate()
+
+        regex = re.search(r'(java version).*"(\d+\.\d).*', output.decode('utf-8'))
+
+        if regex is not None:
+            return regex.group(2)
+
+    # In case Java isn't found simply return None
+    except OSError:
+        pass
+```
+
 
 ---
 # Exception Handling
@@ -383,6 +484,20 @@ Tuples are used to write-protect data and are usually faster than list as it can
 1. Show a tuple
 1. Show a function that returns a tuple
 
+```python
+ITEMS = ["banana", "pera", "uva", "salada mista", "mamao"]
+
+def get_uva():
+    for i, item in enumerate(ITEMS):
+        if item == 'uva':
+            return i, item, "bar"
+```
+
+Exercise if we have time:
+
+Implement a function that finds the first PATTERN in a file and returns a tuple
+with the line number and the line content.
+
 ---
 #Dictionaries
 
@@ -405,6 +520,21 @@ an be marshall/unmarshall to JSON
 1. Show `iteritems` method
 1. `del dict[key]`
 1. `dict.get(key, default)`
+
+JSON
+```Python
+
+foo = {}
+
+import json
+
+content = json.dumps(foo)
+
+print(content)
+
+with open('fruits.json', 'w') as stream:
+    json.dump(foo, stream, indent=4)
+```
 
 ---
 # Exercices
@@ -445,7 +575,7 @@ def fib2(n):   # return Fibonacci series up to n
 ???
 1. Show how to import the code `import fib`
 1. Show method `dir()` that shows what was imported
-1. Show how to import only fib.
+1. Show how to import only fib function. as alias too
 1. Add some code to fibo.py to show that it will be executed
 1. import * to show that global `_MAGIC_VAR` won't get imported
 
@@ -465,6 +595,10 @@ if __name__ == "__main__":
 
 ???
 1. First special variable `__name__`
+
+Import fib and show its name: `fib.__name_`
+Show current `__name__`
+
 1. Explain that imports can come in any part of the code we want. That's not antipattern
 
 
@@ -488,6 +622,8 @@ If not found, it then searches for a file named fibo.py in a list of directories
 1. `PYTHONPATH` (a list of directory names, with the same syntax as the shell variable PATH).
 1. The installation-dependent default
 
+???
+Move fib file to a custom directory and update pythonpath variable
 
 ---
 # Python Packages
@@ -531,6 +667,10 @@ sound/                          Top-level package
               karaoke.py
 ```
 
+???
+Example of __init__.py file:
+https://github.com/docker/compose/blob/master/compose/cli/__init__.py
+
 
 ---
 
@@ -546,9 +686,14 @@ f.close()
 
 ???
 1. read, than readlines than readline
-1. line loop, print with `end=''`
+1. line loop, print
+1. Loop using the file `for line in f:`
+1. Remove the newline with `read().splitlines()`
 1. try,finally
 1. `with` context manager
+
+If you have time do this:
+
 1. Show the `seek` example to read the content again
 Show the old way py26 than the new way
 
@@ -992,15 +1137,14 @@ Write a script to deploy a Java web app :)
 1. Reload tomcat
 1. Treat your deployer to be idempotent
 
-To test it use Vagrant or Docker
-
-For docker, run a centos:7 with this command:
 
 ```
-docker run -it --rm -v $(pwd)/deploy.py:/tmp/deploy.py -p 8080:8080 centos:7
+docker run -it --cap-add SYS_PTRACE --rm -p 8080:8080 -v "$PWD:/code" bernardovale/pyubuntu
 
-python /tmp/deploy.py
+# Execute your deployer inside the container
+./deploy.py
 ```
+
 
 ---
 
