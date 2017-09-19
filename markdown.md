@@ -505,8 +505,6 @@ Dictionary is an unordered collection of key-value pairs.
 
 It is generally used when we have a huge amount of data. Dictionaries are optimized for retrieving data. We must know the key to retrieve the value.
 
-an be marshall/unmarshall to JSON
-
 ```python
 >>> foo = {}
 ```
@@ -516,7 +514,7 @@ an be marshall/unmarshall to JSON
 1. Insert/Update key
 1. Looping over a dict
 1. Find if key exists with `in` and `has_key`
-1. Method `keys`/`iterkets`, `values`
+1. Method `keys`/`iterkeys`, `values`
 1. Show `iteritems` method
 1. `del dict[key]`
 1. `dict.get(key, default)`
@@ -596,7 +594,7 @@ if __name__ == "__main__":
 ???
 1. First special variable `__name__`
 
-Import fib and show its name: `fib.__name_`
+Import fib and show its name: `fib.__name__`
 Show current `__name__`
 
 1. Explain that imports can come in any part of the code we want. That's not antipattern
@@ -670,6 +668,8 @@ sound/                          Top-level package
 ???
 Example of __init__.py file:
 https://github.com/docker/compose/blob/master/compose/cli/__init__.py
+
+create a package example
 
 
 ---
@@ -816,17 +816,6 @@ The next time a caller call `next()` the **producer** gets the control back.
 
 # Generators
 
-With generators:
-
-```python
-def fib(max):
-    a, b = 0, 1
-    while a < max:
-        yield a
-        a, b = b, a + b
-```
-
---
 
 Without Generators:
 
@@ -839,6 +828,21 @@ def fib(max):
         a, b = b, a + b
      return numbers
 ```
+
+--
+
+With generators:
+
+```python
+def fib(max):
+    a, b = 0, 1
+    while a < max:
+        yield a
+        a, b = b, a + b
+```
+
+--
+
 
 ???
 Paste function in shell and show the object and `next` function
@@ -853,92 +857,6 @@ What is wrong with our grep function?
 --
 
 Fix your grep script using generators.
-
----
-
-# Regular Expression
-
-Regular expressions are handled by module `import re`
-
-Most methods follows the same structure:
-
-1. Pattern
-2. String
-3. Flags
-
---
-
-### FINDALL
-
-Return a list with all matches
-
-```python
-import re
-re.findall(r'\d+', "Bernardo has 25 years old and he's a "
-"DevOps Engineer at AvenueCode")
-```
-
-???
-
-Findall
-`\d` = any digit
-+ = One or more occurance
-
----
-
-# Regular Expression
-
-Compiling a regular expression
-
-```python
-regex = re.compile('http\://|https://')
-regex.match("https://avenuecode.com")
-```
-
-???
-Demonstrate re.match() = Return match object or None
-
---
-Searching for a pattern
-
-```python
-print(re.match(r'avenuecode', "https://avenuecode.com"))
-print(re.search(r'avenuecode', "https://avenuecode.com"))
-
-```
-???
-.group() to return the matched string
-
---
-
-Find all occurences
-
-```python
-test = """
-https://avenuecode.com
-https://avenuecode.com.br
-https://acdc.avenuecode.com
-https://jenkins.avenuecode.com"""
-print(re.search(r'avenuecode', "https://avenuecode.com"))
-print(re.findAll(r'avenuecode', "https://avenuecode.com"))
-```
-
----
-# Regular Expression
-
-Replacing stuff!
-
-```python
-re.sub(r'avenuecode', 'ac4success', "https://avenuecode.com")
-```
-
--- 
-Grouping
-
-```python
-regex = re.match(r'(http|https)\://(\w*).(\w.*)', "https://jenkins.avenuecode.com", flags=re.MULTILINE)
-regex.group(1))
-```
 
 ---
 
@@ -969,10 +887,10 @@ print(datetime.datetime.fromtimestamp(mod_time))
 
 Environment Variables
 ```python
-os.environ
-
 os.getenv('PATH')
+os.environ('PATH', '/usr/bin:/usr/local/bin')
 ```
+
 --
 
 Creating a file at home. How can we do that?
@@ -990,6 +908,11 @@ os.path.exists()
 Remove it
 os.remove()
 
+os.listdir('.')
+os.mkdir('foo')
+os.makedirs('foo/bar')
+os.rename('foo', 'bar')
+
 File path manipulation
 os.path.basename -- filename
 os.path.dirname -- directory
@@ -999,6 +922,8 @@ os.path.splitext(f) -- split file and extension
 os.uname()
 
 `os.walk` to use in our exercise
+
+https://docs.python.org/2/library/os.html
 
 ---
 
@@ -1015,7 +940,7 @@ folder/
   one.txt
 ```
 
-```
+```json
 {
   "txt": 2,
   "sh": 1,
@@ -1352,3 +1277,90 @@ PEP8
 flake8 = pep8 + pyflakes
 pyflakes = 
 tox
+
+---
+
+
+# Regular Expression
+
+Regular expressions are handled by module `import re`
+
+Most methods follows the same structure:
+
+1. Pattern
+2. String
+3. Flags
+
+--
+
+### FINDALL
+
+Return a list with all matches
+
+```python
+import re
+re.findall(r'\d+', "Bernardo has 25 years old and he's a "
+"DevOps Engineer at AvenueCode")
+```
+
+???
+
+Findall
+`\d` = any digit
++ = One or more occurance
+
+---
+
+# Regular Expression
+
+Compiling a regular expression
+
+```python
+regex = re.compile('http\://|https://')
+regex.match("https://avenuecode.com")
+```
+
+???
+Demonstrate re.match() = Return match object or None
+
+--
+Searching for a pattern
+
+```python
+print(re.match(r'avenuecode', "https://avenuecode.com"))
+print(re.search(r'avenuecode', "https://avenuecode.com"))
+
+```
+???
+.group() to return the matched string
+
+--
+
+Find all occurences
+
+```python
+test = """
+https://avenuecode.com
+https://avenuecode.com.br
+https://acdc.avenuecode.com
+https://jenkins.avenuecode.com"""
+print(re.search(r'avenuecode', "https://avenuecode.com"))
+print(re.findAll(r'avenuecode', "https://avenuecode.com"))
+```
+
+---
+# Regular Expression
+
+Replacing stuff!
+
+```python
+re.sub(r'avenuecode', 'ac4success', "https://avenuecode.com")
+```
+
+-- 
+Grouping
+
+```python
+regex = re.match(r'(http|https)\://(\w*).(\w.*)', "https://jenkins.avenuecode.com", flags=re.MULTILINE)
+regex.group(1))
+```
